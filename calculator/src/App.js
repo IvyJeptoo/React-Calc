@@ -25,6 +25,11 @@ const  App = () => {
   })
 
   // numClickHandler - for numbers between 0-9
+  // no whole numbers start with zero
+  // there are no multiple zeros before the comma
+  // the format will be “0.” if “.” is pressed first
+// numbers are entered up to 16 integers long
+
   const numClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -39,8 +44,20 @@ const  App = () => {
     }
   }
 
-  // commaClickHandler
-  
+  // commaClickHandler- when the (.) is pressed adds a decimal point to the current num value making it a decimal number
+  // ensures no multiple decimals are possible
+
+  const commaClickHandler = (e) => {
+    e.preventDefault();
+    const value = e.target.innerHTML;
+
+    setCalc({
+      ...calc,
+      num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
+    })
+
+  }
+
 
   return (
     <Wrapper>
