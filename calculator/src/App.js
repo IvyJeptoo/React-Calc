@@ -123,6 +123,17 @@ const percentClickHandler = () => {
 
 }
 
+// reset clickhandler - defaults all the initials of calc returning calc state as it was before being rendeered
+const resetClickHandler = () =>{
+  setCalc({
+    ...calc,
+    sign: "",
+    num: 0,
+    res: 0,
+  })
+}
+
+
 
 
   return (
