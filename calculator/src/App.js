@@ -58,6 +58,24 @@ const  App = () => {
 
   }
 
+  // signClickHandler- when the user press +, -, *, /.
+  // the particular value is then set as a current sign in the calc object
+  // ensures no effect on repeated calls
+
+  const signClickHandler = (e) => {
+    e.preventDefault();
+    const value = e.target.innerHTML;
+
+    setCalc({
+      ...calc,
+      sign: value,
+      num: 0,
+      res: !calc.res && calc.num ? calc.num : calc.res
+
+    })
+  }
+
+
 
   return (
     <Wrapper>
