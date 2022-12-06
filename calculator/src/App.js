@@ -75,6 +75,54 @@ const  App = () => {
     })
   }
 
+  // equalsClickHandler- calculates the results when = sign is pressed
+  // dependednt on the num, res, and sign value
+  // the returned value will be the new res 
+  // no repeated calls and no division with 0
+
+  const equalsClickHandler = (e) => {
+    if (calc.sign && calc.num) {
+      const math = (a, b, sign) => 
+        sign === "+" ? a + b : sign === "-" ? a - b : sign === "X" ? a * b : a / b;
+
+      setCalc({
+        ...calc,
+        res: calc.num === "0" && calc.sign === "/" ? "Can't divide with 0" : math(Number(calc.res), Number(calc.num), calc.sign),
+        sign: "",
+        num: 0,
+
+      })
+      
+    }
+
+  }
+
+
+// invertClickHandler checks if there's any entered value num or calculated res then inverts by multiplying by -1
+
+const invertClickHandler = () => {
+  setCalc({
+    ...calc,
+    num: calc.num ? calc.num * -1 : 0,
+    res: calc.res ? calc.res * -1 : 0,
+    sign: "",
+  })
+}
+
+// percentClickhandler- checks is there's any entered value num/res then calculates % using the math.pow  that returns base to the exponent power
+
+const percentClickHandler = () => {
+  let num = calc.num ? parseFloat(calc.num) : 0;
+  let res = calc.num ? parseFloat(calc.res) : 0;
+
+  setCalc({
+    ...calc,
+    num: (num /= Math.pow(100, 1)),
+    res: (res /= Math.pow(100,1))
+  })
+
+}
+
 
 
   return (
