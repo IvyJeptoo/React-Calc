@@ -1,4 +1,5 @@
 import React from 'react'
+import "../assets/css/wrapper.css"
 
 const Wrapper = ({children}) => {
   return (

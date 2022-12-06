@@ -1,0 +1,10 @@
+.wrapper {
+    width: 400px;
+    height: 600px;
+    padding: 15px;
+    background: #d7b7d2;
+    border-radius: 5%;
+    box-shadow: inset 9.91px 9.91px 15px #C4A7BF, inset -9.91px -9.91px 15px #EAC7E5;
+    margin-left: 45em;
+    margin-top: 3em;
+  }

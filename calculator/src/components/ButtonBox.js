@@ -1,4 +1,5 @@
 import React from 'react'
+import "../assets/css/buttonBox.css"
 
 const ButtonBox = ({children}) => {
   return (
