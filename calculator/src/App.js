@@ -16,6 +16,14 @@ const btnValues = [
 
 ]
 
+// INPUT FORMATTING
+// take a number, format it into the string format and create the space separators for the thousand mark
+const toLocaleString = (num) =>
+  String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+
+  // to reverse the process
+const removeSpaces = (num) => num.toString().replace(/\s/g, "");
+
 
 const  App = () => {
   let [calc, setCalc] = useState({
@@ -34,10 +42,10 @@ const  App = () => {
     e.preventDefault();
     const value = e.target.innerHTML;
 
-    if (calc.num.length < 16){
+    if (removeSpaces(calc.num).length < 16){
       setCalc({
         ...calc, 
-        num: calc.num === 0 && value === "0" ? "0" : calc.num % 1 === 0 ? Number(calc.num + value) : calc.num + value, 
+        num: calc.num === 0 && value === "0" ? "0" : removeSpaces(calc.num) % 1 === 0 ? toLocaleString(Number(removeSpaces(calc.num + value))) : toLocaleString(calc.num + value), 
         res: !calc.sign ? 0 : calc.res
 
       })
@@ -87,7 +95,7 @@ const  App = () => {
 
       setCalc({
         ...calc,
-        res: calc.num === "0" && calc.sign === "/" ? "Can't divide with 0" : math(Number(calc.res), Number(calc.num), calc.sign),
+        res: calc.num === "0" && calc.sign === "/" ? "Can't divide with 0" : math(Number(removeSpaces(calc.res)), Number(removeSpaces(calc.num)), calc.sign),
         sign: "",
         num: 0,
 
@@ -103,8 +111,8 @@ const  App = () => {
 const invertClickHandler = () => {
   setCalc({
     ...calc,
-    num: calc.num ? calc.num * -1 : 0,
-    res: calc.res ? calc.res * -1 : 0,
+    num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
+    res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
     sign: "",
   })
 }
@@ -112,8 +120,8 @@ const invertClickHandler = () => {
 // percentClickhandler- checks is there's any entered value num/res then calculates % using the math.pow  that returns base to the exponent power
 
 const percentClickHandler = () => {
-  let num = calc.num ? parseFloat(calc.num) : 0;
-  let res = calc.num ? parseFloat(calc.res) : 0;
+  let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+  let res = calc.num ? parseFloat(removeSpaces(calc.res)) : 0;
 
   setCalc({
     ...calc,
@@ -132,9 +140,6 @@ const resetClickHandler = () =>{
     res: 0,
   })
 }
-
-
-
 
   return (
     <Wrapper>
